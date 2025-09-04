@@ -1,0 +1,12 @@
+[package]
+name = "cvt_models"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+burn = { version = "0.18.0", features = ["ndarray"], default-features = false }
+ndarray = { version = "0.16", features = ["rayon"] }
+burn-import = "0.18.0"
+
+[build-dependencies]
+burn-import = { version = "0.18.0", features = ["onnx"] }
