@@ -115,7 +115,8 @@ class VAE(nn.Module):
     def decode(self, z: jnp.ndarray, training: bool = True):
         x_recon = self.Decoder(z, training)
         return x_recon
-
+    
+    # NOTE: THIS IS NOT A VAE UNLESS YOU UNCOMMENT THE BELOW USE OF STD & EPS
     def reparameterize(self, key: jnp.ndarray, mu: jnp.ndarray, log_var: jnp.ndarray):
         std = jnp.exp(0.5 * log_var)
         eps = random.normal(key, mu.shape)

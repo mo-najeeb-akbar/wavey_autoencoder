@@ -166,6 +166,7 @@ class VAE(nn.Module):
         self.idwt.weight = nn.Parameter(filters, requires_grad=False)
         
 
+    # NOTE: THIS IS NOT A VAE UNLESS YOU UNCOMMENT THE BELOW USE OF STD & EPS
     def reparameterize(self, mu, log_var):
         # std = torch.exp(0.5 * log_var)
         # eps = torch.randn_like(std)

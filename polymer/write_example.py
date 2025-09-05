@@ -1,7 +1,7 @@
 import sys, os
 sys.path.append('/code')
 from load_tfrecords import Dataloader
-from models.jax_vae_t import VAE
+from models.jax_vae_wavelet import VAE
 import numpy as np
 import h5py
 import orbax

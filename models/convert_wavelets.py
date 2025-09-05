@@ -8,8 +8,8 @@ import numpy as np
 import jax.random as random
 import jaxwt as jwt
 from flax import linen as nn
-from jax_vae_t import VAE as JVAE
-from pytorch_vae_t import VAE as TVAE
+from jax_vae_wavelet import VAE as JVAE
+from pytorch_vae_wavelet import VAE as TVAE
 from functools import reduce
 from operator import getitem
 import torch.onnx
