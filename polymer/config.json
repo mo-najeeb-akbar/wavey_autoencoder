@@ -1,0 +1,11 @@
+{
+  "input_folder": "/data/sample_pe",
+  "output_folder": "/data/processed_pe",
+  "datasets": [
+    "intensity",
+    "quality",
+    "surface"
+  ],
+  "save_dataset_metadata": true,
+  "save_instrument_params": true
+}
