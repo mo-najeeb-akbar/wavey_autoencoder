@@ -37,7 +37,7 @@ class Encoder(nn.Module):
         act = nn.swish
 
         # Downsampling blocks
-        for i in range(4):
+        for i in range(5):
             x = nn.Conv(self.features, (3, 3), strides=(2, 2), padding=1, use_bias=False,
                        name=f'conv_layers.{i}')(x)
             # x = norm(name=f'bn_layers.{i}')(x, use_running_average=not train)
@@ -52,7 +52,7 @@ class Encoder(nn.Module):
         x = jnp.transpose(x, (0, 3, 1, 2))
         x = x.reshape(batch_size, flattened_size)
         
-        x = nn.Dense(128, use_bias=False, name='dense_0')(x)
+        x = nn.Dense(512, use_bias=False, name='dense_0')(x)
         x = nn.LayerNorm(name='ln_0')(x)
         x = act(x)
         
@@ -74,7 +74,7 @@ class Decoder(nn.Module):
         act = nn.swish
 
         # Initial processing
-        x = nn.Dense(128, use_bias=False, name='dense_0')(x)
+        x = nn.Dense(512, use_bias=False, name='dense_0')(x)
         x = nn.LayerNorm(name='ln_0')(x)
         x = act(x)
         

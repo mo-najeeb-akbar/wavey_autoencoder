@@ -63,6 +63,7 @@ class Dataloader:
             intensity = tf.io.parse_tensor(parsed['intensity'], out_type=tf.float32)
             intensity = tf.reshape(intensity, [parsed['height'], parsed['width']])
             intensity = tf.where(tf.math.is_nan(intensity), 0.0, intensity)
+            intensity = tf.sqrt(intensity)
             return intensity
         
         dataset = dataset.map(parse_intensity_only).batch(100)
@@ -101,6 +102,7 @@ class Dataloader:
         intensity = tf.io.parse_tensor(parsed['intensity'], out_type=tf.float32)
         intensity = tf.reshape(intensity, [parsed['height'], parsed['width']])
         intensity = tf.where(tf.math.is_nan(intensity), 0.0, intensity)
+        intensity = tf.sqrt(intensity)
         
         # Apply augmentations
         if self.enable_augmentation:
