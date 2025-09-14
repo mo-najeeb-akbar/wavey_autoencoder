@@ -142,7 +142,7 @@ class Dataloader:
         dataset = dataset.repeat()
         
         if shuffle:
-            dataset = dataset.shuffle(4 * self.batch_size)
+            dataset = dataset.shuffle(4 * self.batch_size, seed=42)
         
         dataset = dataset.batch(self.batch_size, drop_remainder=True)
         dataset = dataset.prefetch(tf.data.AUTOTUNE)
