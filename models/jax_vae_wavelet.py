@@ -9,14 +9,12 @@ class ResidualBlock(nn.Module):
 
     @nn.compact
     def __call__(self, x, train: bool = True):
-        # norm = partial(nn.BatchNorm, momentum=0.9, epsilon=1e-5, dtype=jnp.float32)
         norm = partial(nn.GroupNorm, num_groups=8)
         act = nn.swish
         skip = x
         
         # First conv
         x = nn.Conv(self.filters, (3, 3), padding=1, use_bias=False, name='conv1')(x)
-        #x = norm(name=f'bn1')(x, use_running_average=not train)
         x = norm(name=f'gn1')(x)
         x = act(x)
         
@@ -32,7 +30,6 @@ class Encoder(nn.Module):
 
     @nn.compact
     def __call__(self, x, train: bool = True):
-        # norm = partial(nn.BatchNorm, momentum=0.9, epsilon=1e-5, dtype=jnp.float32)
         norm = partial(nn.GroupNorm, num_groups=8)
         act = nn.swish
 
@@ -40,7 +37,6 @@ class Encoder(nn.Module):
         for i in range(5):
             x = nn.Conv(self.features, (3, 3), strides=(2, 2), padding=1, use_bias=False,
                        name=f'conv_layers.{i}')(x)
-            # x = norm(name=f'bn_layers.{i}')(x, use_running_average=not train)
             x = norm(name=f'gn_layers.{i}')(x)
             x = act(x)
             x = ResidualBlock(self.features)(x, train=train)
@@ -69,7 +65,6 @@ class Decoder(nn.Module):
 
     @nn.compact
     def __call__(self, x, train: bool = True):
-        # norm = partial(nn.BatchNorm, momentum=0.9, epsilon=1e-5, dtype=jnp.float32)
         norm = partial(nn.GroupNorm, num_groups=8)
         act = nn.swish
 
